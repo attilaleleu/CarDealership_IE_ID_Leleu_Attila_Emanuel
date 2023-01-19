@@ -1,0 +1,41 @@
+﻿@page "{id:int?}"
+@model CarDealership.Pages.Dealerships.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Dealerships</h1>
+
+<p>
+    <a asp-page="Create">Create New Dealership</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Dealership[0].DealershipName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.DealershipData.Dealerships) {
+            string selectedRow = "";
+            if(item.ID == Model.DealershipID)
+            {
+                selectedRow = "table-success";
+            }
+            <tr class="@selectedRow">
+            <td>
+                @Html.DisplayFor(modelItem => item.DealershipName)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
